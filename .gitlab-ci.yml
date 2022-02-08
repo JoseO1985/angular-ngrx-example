@@ -39,13 +39,16 @@ deploy_main:
     - pip install awscli
   script:
     - aws s3 sync ./dist/angular-ngrx s3://angular-testing/ --acl=public-read --delete
+  environment:
+    name: production
+    url: http://angular-testing.s3-website.eu-west-2.amazonaws.com/
   only: ["main"]
 
 # Job Two for making build dev
-build_main:
+build_development:
   stage: build
   script:
-    - npm run build --configuration=development
+    - npm run build --configuration=development,
   only: ["dev"]
 
   # Job Three for deploy dev build to S3
@@ -56,4 +59,7 @@ deploy_development:
     - pip install awscli
   script:
     - aws s3 sync ./dist/angular-ngrx s3://angular-testing-development/ --acl=public-read --delete
+  environment:
+    name: development
+    url: http://angular-testing-development.s3-website.eu-west-2.amazonaws.com/
   only: ["dev"]
