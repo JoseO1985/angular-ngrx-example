@@ -1,0 +1,84 @@
+<mat-card class="component-card mat-elevation-z8">
+  <h4>Add New Customer</h4>
+  <form [formGroup]="formGroup">
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input type="text" matInput formControlName="id" readonly="true" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input type="text" matInput formControlName="firstName" />
+      <mat-error
+        *ngIf="
+          formGroup.controls['firstName'].touched &&
+          formGroup.controls['firstName'].errors &&
+          formGroup.controls['firstName'].errors['required']
+        "
+      >
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input type="text" matInput formControlName="lastName" />
+      <mat-error
+        *ngIf="
+          formGroup.controls['lastName'].touched &&
+          formGroup.controls['lastName'].errors &&
+          formGroup.controls['lastName'].errors['required']
+        "
+      >
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input type="number" matInput formControlName="age" />
+      <mat-error
+        *ngIf="
+          formGroup.controls['age'].touched &&
+          formGroup.controls['age'].errors &&
+          formGroup.controls['age'].errors['pattern']
+        "
+      >
+        Edad inválida
+      </mat-error>
+      <mat-error
+        *ngIf="
+          formGroup.controls['age'].touched &&
+          formGroup.controls['age'].errors &&
+          formGroup.controls['age'].errors['required']
+        "
+      >
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" />
+      <mat-error
+        *ngIf="
+          formGroup.controls['email'].touched &&
+          formGroup.controls['email'].errors &&
+          formGroup.controls['email'].errors['email']
+        "
+      >
+        Email inválido
+      </mat-error>
+      <mat-error
+        *ngIf="
+          formGroup.controls['email'].touched &&
+          formGroup.controls['email'].errors &&
+          formGroup.controls['email'].errors['required']
+        "
+      >
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <div class="actions">
+      <button (click)="saveCustomer()" md-raised-button>Save</button>
+      <button (click)="resetForm()" md-raised-button>Clear</button>
+    </div>
+  </form>
+</mat-card>

@@ -1,0 +1,6 @@
+<app-filter-customers (filter)="onFilter($event)"></app-filter-customers>
+<app-customer-view (select)="onSelect($event)"></app-customer-view>
+<app-customer-add
+  (save)="onSave($event)"
+  [customer]="(selectedCustomer$ | async)!"
+></app-customer-add>
