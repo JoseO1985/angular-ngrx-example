@@ -40,3 +40,20 @@ deploy_main:
   script:
     - aws s3 sync ./dist/angular-ngrx s3://angular-testing/ --acl=public-read --delete
   only: ["main"]
+
+# Job Two for making build dev
+build_main:
+  stage: build
+  script:
+    - npm run build --configuration=development
+  only: ["dev"]
+
+  # Job Three for deploy dev build to S3
+deploy_development:
+  image: python:latest
+  stage: deploy
+  before_script:
+    - pip install awscli
+  script:
+    - aws s3 sync ./dist/angular-ngrx s3://angular-testing-development/ --acl=public-read --delete
+  only: ["dev"]
