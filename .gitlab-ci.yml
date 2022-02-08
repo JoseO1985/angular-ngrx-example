@@ -28,7 +28,7 @@ before_script:
 build_main:
   stage: build
   script:
-    - ng build --prod
+    - npm run build
   only: ["main"]
 
 # Job Three for deploy build to S3
@@ -48,7 +48,7 @@ deploy_main:
 build_development:
   stage: build
   script:
-    - ng build --configuration=development
+    - npm run build:dev
   only: ["dev"]
 
   # Job Three for deploy dev build to S3
