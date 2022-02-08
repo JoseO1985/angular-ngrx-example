@@ -6,6 +6,13 @@ stages:
   - build
   - deploy
 
+# caching for reuse
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - dist/
+
 # This command is run before the execution of stages
 before_script:
   - npm install
@@ -14,12 +21,15 @@ before_script:
 build_main:
   stage: build
   script:
-    - npm run build
+    - npm run build --prod
   only: ["main"]
 
-# Job Two for deploy build to server
+# Job Two for deploy build to S3
 deploy_main:
+  image: python:latest
   stage: deploy
+  before_script:
+    - pip install awscli
   script:
-    - echo "deploy Build"
+    - aws s3 sync ./dist s3://angular-testing/ --acl=public-read --delete
   only: ["main"]
