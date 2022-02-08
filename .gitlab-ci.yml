@@ -58,7 +58,7 @@ deploy_development:
   before_script:
     - pip install awscli
   script:
-    - aws s3 sync ./dist/angular-ngrx s3://angular-testing-development/ --acl=public-read --delete
+    - aws s3 sync ./dist/angular-ngrx s3://angular-testing-development/ --acl=public-read --delete --access-key-id=$DEVELOPMENT_ACCESS_KEY_ID --secret-access-key=$DEVELOPMENT_SECRET_ACCESS_KEY
   environment:
     name: development
     url: http://angular-testing-development.s3-website.eu-west-2.amazonaws.com/
