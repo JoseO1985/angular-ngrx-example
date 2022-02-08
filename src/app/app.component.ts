@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
+import { environment } from '../environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,5 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  title = 'Basic Angular Ngrx Example';
+  title = `${
+    environment.production ? '[PRODUCTION MODE]' : '[DEVELOPMENT MODE]'
+  } Basic Angular Ngrx Example`;
 }
